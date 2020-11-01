@@ -1,0 +1,21 @@
+.import-page {
+    width: 90vw;
+    margin: auto;
+    padding-top: 10px;
+    border: 1px solid grey;
+    box-shadow: 0px 4px 18px rgba(0,0,0,0.3);
+    background-color: rgba($color: #FFFFFF, $alpha: 0.8);
+
+    .button-container {
+        min-height: 20px;
+        padding: 5px;
+    }
+
+    button {
+        float: right;
+        color: white;
+        background-color: blue;
+        height: 30px;
+        line-height: 30px;
+    }
+}

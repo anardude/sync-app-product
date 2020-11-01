@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
 import HomePage from './pages/home/home.component';
+import ImportPage from './pages/import/import.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 import Header from './components/header/header.component';
@@ -48,25 +49,30 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='App'>
         <CurrentUserContext.Provider value={this.state.currentUser}>
-          <Header />
+          <div className='header-container'>
+            <Header />
+          </div>
         </CurrentUserContext.Provider>
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route
-            exact
-            path='/signin'
-            render={() =>
-              this.state.currentUser ? (
-                <Redirect to='/' />
-              ) : (
-                <SignInAndSignUpPage />
-              )
-            }
-          />
-        </Switch>
-      </div>
+        <div className="container">
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/import' component={ImportPage} />
+            <Route
+              exact
+              path='/signin'
+              render={() =>
+                this.state.currentUser ? (
+                  <Redirect to='/' />
+                ) : (
+                  <SignInAndSignUpPage />
+                )
+              }
+            />
+          </Switch>
+        </div>
+        </div>
     );
   }
 }

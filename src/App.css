@@ -3,12 +3,14 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 30vmin;
   pointer-events: none;
 }
+
 body {
   font-family: 'Roboto Condensed', sans-serif;
-  padding: 20px 60px;
+  padding: 0;
+  background: url('./assets/background.png');
 }
 
 a {
