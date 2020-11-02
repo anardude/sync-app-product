@@ -17,16 +17,16 @@ const Header = () => {
         <Logo className='logo' />
       </Link>
       <div className='options'>
-        <Link className='option' to='/shop'>
-          CONTACT
+        <Link className='option' to='/import'>
+          IMPORT
         </Link>
         {currentUser ? (
           <div className='option' onClick={() => auth.signOut()}>
-            SIGN OUT
+            CONNEXION
           </div>
         ) : (
           <Link className='option' to='/signin'>
-            SIGN IN
+            DECONNEXION
           </Link>
         )}
       </div>

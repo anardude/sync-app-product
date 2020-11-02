@@ -4,7 +4,7 @@ import ImportLine from '../import-line/import-line.component';
 
 import './import-table.styles.scss';
 
-const ImportTable = ({dataTable, fields}) => {
+const ImportTable = ({dataTable, fields, onCheckboxChange, onFieldChange}) => {
     return (
         <div className='import-table' >
             {dataTable && dataTable.length > 0 && (
@@ -28,7 +28,12 @@ const ImportTable = ({dataTable, fields}) => {
                                     fieldValue: ''
                                 }
                                 return ( 
-                                    <ImportLine key={idx} line={line}  />
+                                    <ImportLine 
+                                        key={idx} 
+                                        line={line} 
+                                        onCheckboxChange={(c) => onCheckboxChange(c, idx)} 
+                                        onFieldChange={(f) => onFieldChange(f, idx)} 
+                                    />
                                 )
                         })}
                     </div>
