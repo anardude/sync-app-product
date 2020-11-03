@@ -17,6 +17,7 @@ export const ImportContext = createContext({
     handleFieldChange: () => {},
     handleClickValidButton: () => {},
     handleClickAnalyseButton: () => {},
+    handleClickClearButton: () => {},
     setIndexLastField: () => {}
   });
 
@@ -36,6 +37,10 @@ const ImportProvider = ({ children }) => {
         setTabFields(fields);
     }
     const handleClickAnalyseButton = () => setDataTable(convertTextToArray(dataArea));
+    const handleClickClearButton = () => {
+      setDataArea([]);
+      setDataTable([]);
+    }
     const handleClickValidButton = () => {
         const data = createImportTable({dataTable, tabFields, indexLastField, baseUrl});
         console.log(data);
@@ -53,6 +58,7 @@ const ImportProvider = ({ children }) => {
             handleFieldChange,
             handleClickValidButton,
             handleClickAnalyseButton,
+            handleClickClearButton,
             setIndexLastField
         }}
       >

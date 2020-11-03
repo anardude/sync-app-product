@@ -8,7 +8,7 @@ import logo from '../../assets/logo.png';
 
 import './header.styles.scss';
 
-const Header = () => {
+const Header = (title) => {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -16,6 +16,7 @@ const Header = () => {
       <Link className='logo-container' to='/'>
         <img className='logo' src={logo} alt='logo' />
       </Link>
+      <h2>Sync App Product</h2>
       <div className='options'>
         <Link className='option' to='/import'>
           IMPORT
