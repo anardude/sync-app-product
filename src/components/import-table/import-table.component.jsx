@@ -2,9 +2,12 @@ import React from 'react';
 
 import ImportLine from '../import-line/import-line.component';
 
+import { ImportContext } from '../../providers/import/import.provider';
+
 import './import-table.styles.scss';
 
-const ImportTable = ({dataTable, fields, onCheckboxChange, onFieldChange}) => {
+const ImportTable = () => {
+    const { dataTable, tabFields } = React.useContext(ImportContext);
     return (
         <div className='import-table' >
             {dataTable && dataTable.length > 0 && (
@@ -19,7 +22,7 @@ const ImportTable = ({dataTable, fields, onCheckboxChange, onFieldChange}) => {
                         {dataTable
                             .filter((dataLine, idx) => idx < 20)
                             .map((dataLine, idx) => {
-                                const field = fields && idx < fields.length && fields[idx] !== 'undefined' ? fields[idx] : '';
+                                const field = tabFields && idx < tabFields.length && tabFields[idx] !== 'undefined' ? tabFields[idx] : '';
                                 const line = {
                                     id: idx,
                                     data: dataLine,
@@ -28,12 +31,7 @@ const ImportTable = ({dataTable, fields, onCheckboxChange, onFieldChange}) => {
                                     fieldValue: ''
                                 }
                                 return ( 
-                                    <ImportLine 
-                                        key={idx} 
-                                        line={line} 
-                                        onCheckboxChange={(c) => onCheckboxChange(c, idx)} 
-                                        onFieldChange={(f) => onFieldChange(f, idx)} 
-                                    />
+                                    <ImportLine key={idx} idx={idx} line={line} />
                                 )
                         })}
                     </div>

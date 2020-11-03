@@ -1,8 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import './App.css';
-
 import HomePage from './pages/home/home.component';
 import ImportPage from './pages/import/import.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
@@ -12,6 +10,9 @@ import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import CurrentUserContext from './contexts/current-user/current-user.context';
+import ImportProvider from './providers/import/import.provider';
+
+import './App.css';
 
 class App extends React.Component {
   constructor() {
@@ -59,7 +60,9 @@ class App extends React.Component {
         <div className="container">
           <Switch>
             <Route exact path='/' component={HomePage} />
-            <Route exact path='/import' component={ImportPage} />
+            <ImportProvider>
+              <Route exact path='/import' component={ImportPage} />
+            </ImportProvider>
             <Route
               exact
               path='/signin'
