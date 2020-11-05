@@ -1,0 +1,23 @@
+.supplier-select {
+    display: inline;
+
+    .icon {
+        display: inline;
+        font-size: 26px;
+        font-weight: bold;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .icon:hover {
+        color: darkred;
+    }
+    
+    .custom-select {
+        display: inline;
+
+        select {
+            padding: 5px;
+            margin: 0 10px;
+        }
+    }
+}

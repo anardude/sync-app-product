@@ -21,7 +21,7 @@ export const ImportContext = createContext({
     setIndexLastField: () => {}
   });
 
-const ImportProvider = ({ children }) => {
+export const ImportProvider = ({ children }) => {
     const fields = ['code','name', 'country', 'price', 'weight', 'quantity'];
     const baseUrl = 'https://extranet.organic-alliance.com/product/'
 
@@ -38,7 +38,7 @@ const ImportProvider = ({ children }) => {
     }
     const handleClickAnalyseButton = () => setDataTable(convertTextToArray(dataArea));
     const handleClickClearButton = () => {
-      setDataArea([]);
+      setDataArea('');
       setDataTable([]);
     }
     const handleClickValidButton = () => {

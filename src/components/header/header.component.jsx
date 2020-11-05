@@ -22,12 +22,12 @@ const Header = (title) => {
           IMPORT
         </Link>
         {currentUser ? (
-          <div className='option' onClick={() => auth.signOut()}>
-            CONNEXION
+          <div className='option' onClick={() => auth.signOut()} to='/'>
+            DECONNEXION
           </div>
         ) : (
           <Link className='option' to='/signin'>
-            DECONNEXION
+            CONNEXION
           </Link>
         )}
       </div>

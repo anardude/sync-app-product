@@ -10,7 +10,7 @@ import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import CurrentUserContext from './contexts/current-user/current-user.context';
-import ImportProvider from './providers/import/import.provider';
+import SupplierProvider from './providers/suppliers/supplier.provider';
 
 import './App.css';
 
@@ -56,27 +56,26 @@ class App extends React.Component {
           <div className='header-container'>
             <Header />
           </div>
-        </CurrentUserContext.Provider>
+        </CurrentUserContext.Provider>  
         <div className="container">
-          <Switch>
-            <Route exact path='/' component={HomePage} />
-            <ImportProvider>
+          <SupplierProvider>
+            <Switch>
+              <Route exact path='/' component={HomePage} />
               <Route exact path='/import' component={ImportPage} />
-            </ImportProvider>
-            <Route
-              exact
-              path='/signin'
-              render={() =>
-                this.state.currentUser ? (
-                  <Redirect to='/' />
-                ) : (
-                  <SignInAndSignUpPage />
-                )
-              }
-            />
-          </Switch>
+              <Route
+                exact
+                path='/signin'
+                render={() => this.state.currentUser ? (
+                    <Redirect to='/' />
+                  ) : (
+                    <SignInAndSignUpPage />
+                  )
+                }
+              />
+            </Switch>
+          </SupplierProvider>
         </div>
-        </div>
+      </div>
     );
   }
 }

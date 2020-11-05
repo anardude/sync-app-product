@@ -3,13 +3,13 @@ import React from 'react';
 import ImportArea from '../../components/import-area/import-area.component';
 import ImportTable from '../../components/import-table/import-table.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
-import CustomSelect from '../../components/custom-select/custom-select.component';
+import SupplierSelect from '../../components/supplier-select/supplier-select.component';
 
-import { ImportContext } from '../../providers/import/import.provider';
+import { ImportProvider, ImportContext } from '../../providers/import/import.provider';
 
 import './import.styles.scss';
 
-const ImportPage = () => {
+const ImportContent = () => {
     const { handleClickAnalyseButton, handleClickValidButton, handleClickClearButton } = React.useContext(ImportContext);
     
     const options = [
@@ -28,7 +28,7 @@ const ImportPage = () => {
             <div className='import-area-container'>
                 <ImportArea />
                 <div className='button-container'>
-                    <CustomSelect onChange={handleSelectChange} options={options} />
+                    <SupplierSelect onChange={handleSelectChange} options={options} />
                     <div className='spacer'/>
                     <CustomButton onClick={handleClickAnalyseButton} >Analyse</CustomButton>
                     <CustomButton onClick={handleClickClearButton} >Effacer</CustomButton>
@@ -37,6 +37,15 @@ const ImportPage = () => {
             </div>
             <ImportTable />
         </div>
+    );
+}
+
+
+const ImportPage = () => {
+    return (
+        <ImportProvider>
+            <ImportContent />
+        </ImportProvider>
     );
 }
 

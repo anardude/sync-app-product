@@ -3,7 +3,7 @@ export const cleanTextFromBlankLines = (textToConvert) => {
 };
 
 export const convertTextToArray = (textToConvert) => {
-    return textToConvert.split(/\r?\n/);
+    return textToConvert && textToConvert.split(/\r?\n/);
 };
 
 export const arrayKeyExist = (table, key) => {
@@ -15,6 +15,7 @@ export const createImportTable = ({dataTable, tabFields, indexLastField, baseUrl
     let tempTab = [];
     let nombreBoucle = 1;
     const newTab = [];
+
     dataTable.forEach((line, idx) => {
         const indexForLine = idx - (nombreBoucle -1) * (indexLastField + 1);
         arrayKeyExist(tabFields, indexForLine) && tempTab.push(line);
@@ -27,5 +28,6 @@ export const createImportTable = ({dataTable, tabFields, indexLastField, baseUrl
             nombreBoucle ++;
         }
     });
+
     return newTab;
 };
