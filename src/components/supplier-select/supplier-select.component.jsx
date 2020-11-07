@@ -8,7 +8,7 @@ import CustomModal from '../custom-modal/custom-modal.component';
 import './supplier-select.styles.scss';
 
 const SupplierSelect = () => {
-  const { suppliers } = useContext(SupplierContext);
+  const { lines } = useContext(SupplierContext);
 
   const [hiddenPop, setHiddenPop] = useState(false);
 
@@ -21,7 +21,7 @@ const SupplierSelect = () => {
   };
 
   const selectMap = () => {
-    return suppliers.map(supplier => {
+    return lines.map(supplier => {
       return { value: supplier.code, label: supplier.name };
     });
   };

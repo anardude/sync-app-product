@@ -1,49 +1,13 @@
 .supplier-list {
-    width: 100%;
-    height: fit-content;
-    padding-bottom: 20px;
-    
-
-    .title {
-        color: white;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        background-color: #035e0a;
-    }
-
+  .list-list {
     .content {
-        display: grid;
-        grid-template-columns: 1fr;
-        padding: 0 20px;
+      .table-title {
+        grid-template-columns: 1fr 1fr 2fr 1fr;
+      }
 
-        .table-title {
-            display: grid;
-            grid-template-columns: 1fr 1fr 3fr 1fr;
-            font-weight: bold;
-            height: 30px;
-            
-            .element {
-                border-bottom: 1px solid grey;
-                text-align: center;
-                line-height: 30px;
-            }
-        }
-
-        .new {
-            display: grid;
-            grid-template-columns: 1fr;
-            width: 100%;
-            text-align: left;
-            height: 30px;
-
-            .element {
-                width: fit-content;
-                cursor: pointer;
-                text-align: left;
-                font-size: 24px;
-                padding: 5px 0;
-            }
-        }
+      .row {
+        grid-template-columns: 1fr 1fr 2fr 1fr;
+      }
     }
+  }
 }

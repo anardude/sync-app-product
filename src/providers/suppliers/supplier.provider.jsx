@@ -1,51 +1,50 @@
 import React, { createContext, useState, useEffect } from 'react';
 
 export const SupplierContext = createContext({
-  suppliers: {},
+  lines: {},
   onLineEdit: '',
-  addSupplier: () => {},
-  editSupplier: () => {},
-  deleteSupplier: () => {},
+  addLine: () => {},
+  editLine: () => {},
+  deleteLine: () => {},
   toggleLineEdit: () => {},
 });
 
 export const SupplierProvider = ({ children }) => {
   //localStorage.clear();
   const localSuppliers = JSON.parse(localStorage.getItem('suppliers'));
-  //console.log(localSuppliers);
 
-  const [suppliers, setSuppliers] = useState(localSuppliers || []);
+  const [lines, setSuppliers] = useState(localSuppliers || []);
   const [onLineEdit, setLineEdit] = useState();
 
-  const addSupplier = supplier => {
-    supplier.id = suppliers.length + 1;
-    setSuppliers([...suppliers, supplier]);
+  const addLine = supplier => {
+    supplier.id = lines.length + 1;
+    setSuppliers([...lines, supplier]);
   };
 
-  const editSupplier = supplier => {
+  const editLine = supplier => {
     setSuppliers(
-      suppliers.map(item => (item.id === supplier.id ? supplier : item))
+      lines.map(item => (item.id === supplier.id ? supplier : item))
     );
   };
 
-  const deleteSupplier = supplier => {
-    setSuppliers(suppliers.filter(item => item.id !== supplier.id));
+  const deleteLine = supplier => {
+    setSuppliers(lines.filter(item => item.id !== supplier.id));
   };
 
   const toggleLineEdit = (id = '') => setLineEdit(onLineEdit ? '' : id);
 
   useEffect(() => {
-    localStorage.setItem('suppliers', JSON.stringify(suppliers));
-  }, [suppliers]);
+    localStorage.setItem('suppliers', JSON.stringify(lines));
+  }, [lines]);
 
   return (
     <SupplierContext.Provider
       value={{
-        suppliers,
+        lines,
         onLineEdit,
-        addSupplier,
-        editSupplier,
-        deleteSupplier,
+        addLine,
+        editLine,
+        deleteLine,
         toggleLineEdit,
       }}
     >
