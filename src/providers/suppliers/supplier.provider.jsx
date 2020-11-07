@@ -1,53 +1,57 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const SupplierContext = createContext({
-    suppliers: {},
-    onLineEdit: '',
-    updateSuppliers: () => {},
-    addSupplier: () => {},
-    editSupplier: () => {},
-    deleteSupplier: () => {},
-    toggleLineEdit: () => {}
- });
+  suppliers: {},
+  onLineEdit: '',
+  addSupplier: () => {},
+  editSupplier: () => {},
+  deleteSupplier: () => {},
+  toggleLineEdit: () => {},
+});
 
 export const SupplierProvider = ({ children }) => {
-    const suppliersData = [
-        { id: 1, code: 'pronatura', name: 'ProNatura', baseUrl: '' },
-        { id: 2, code: 'provincebio', name: 'Province Bio', baseUrl: '' }
-    ];
+  //localStorage.clear();
+  const localSuppliers = JSON.parse(localStorage.getItem('suppliers'));
+  //console.log(localSuppliers);
 
-    const [suppliers, setSuppliers] = useState(suppliersData);
-    const [onLineEdit, setLineEdit] = useState();
+  const [suppliers, setSuppliers] = useState(localSuppliers || []);
+  const [onLineEdit, setLineEdit] = useState();
 
-    const updateSuppliers = (data) => {
-        setSuppliers(data);
-    };
+  const addSupplier = supplier => {
+    supplier.id = suppliers.length + 1;
+    setSuppliers([...suppliers, supplier]);
+  };
 
-    const addSupplier = (supplier) => setSuppliers(suppliersData.push(supplier));
-
-    const editSupplier = (supplier) => setSuppliers(suppliersData.map((item) => item.id === supplier.id ? supplier : item));
-
-    const deleteSupplier = (supplier) => setSuppliers(suppliersData.filter((item) => item.id !== supplier.id));
-
-    const toggleLineEdit = (id='') => {
-      setLineEdit(onLineEdit ? '' : id);
-    }
-    
-    return (
-      <SupplierContext.Provider
-        value={{
-            suppliers,
-            onLineEdit,
-            updateSuppliers,
-            addSupplier,
-            editSupplier,
-            deleteSupplier,
-            toggleLineEdit
-        }}
-      >
-        {children}
-      </SupplierContext.Provider>
+  const editSupplier = supplier => {
+    setSuppliers(
+      suppliers.map(item => (item.id === supplier.id ? supplier : item))
     );
   };
-  
-  export default SupplierProvider;
+
+  const deleteSupplier = supplier => {
+    setSuppliers(suppliers.filter(item => item.id !== supplier.id));
+  };
+
+  const toggleLineEdit = (id = '') => setLineEdit(onLineEdit ? '' : id);
+
+  useEffect(() => {
+    localStorage.setItem('suppliers', JSON.stringify(suppliers));
+  }, [suppliers]);
+
+  return (
+    <SupplierContext.Provider
+      value={{
+        suppliers,
+        onLineEdit,
+        addSupplier,
+        editSupplier,
+        deleteSupplier,
+        toggleLineEdit,
+      }}
+    >
+      {children}
+    </SupplierContext.Provider>
+  );
+};
+
+export default SupplierProvider;

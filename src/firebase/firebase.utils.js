@@ -3,13 +3,13 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: "AIzaSyB9wpsep3ZJ9YWzsCtGr1_K69L9D0bpsyI",
-  authDomain: "sync-app-product.firebaseapp.com",
-  databaseURL: "https://sync-app-product.firebaseio.com",
-  projectId: "sync-app-product",
-  storageBucket: "sync-app-product.appspot.com",
-  messagingSenderId: "942779882146",
-  appId: "1:942779882146:web:ce9881b532578c899995fb"
+  apiKey: 'AIzaSyB9wpsep3ZJ9YWzsCtGr1_K69L9D0bpsyI',
+  authDomain: 'sync-app-product.firebaseapp.com',
+  databaseURL: 'https://sync-app-product.firebaseio.com',
+  projectId: 'sync-app-product',
+  storageBucket: 'sync-app-product.appspot.com',
+  messagingSenderId: '942779882146',
+  appId: '1:942779882146:web:ce9881b532578c899995fb',
 };
 
 firebase.initializeApp(config);
@@ -29,7 +29,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log('error creating user', error.message);
@@ -46,7 +46,7 @@ export const addCollectionAndDocuments = async (
   const collectionRef = firestore.collection(collectionKey);
 
   const batch = firestore.batch();
-  objectsToAdd.forEach((obj) => {
+  objectsToAdd.forEach(obj => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
@@ -54,14 +54,14 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
-export const convertSuppliersSnapshotToMap = (suppliers) => {
-  const transformedCollection = suppliers.docs.map((doc) => {
+export const convertSuppliersSnapshotToMap = suppliers => {
+  const transformedCollection = suppliers.docs.map(doc => {
     const { name, priceLists } = doc.data();
 
     return {
       id: doc.id,
       name,
-      priceLists
+      priceLists,
     };
   });
 

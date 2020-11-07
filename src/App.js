@@ -18,9 +18,7 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      currentUser: null
-    };
+    this.state = { currentUser: null };
   }
 
   unsubscribeFromAuth = null;
@@ -34,13 +32,13 @@ class App extends React.Component {
           this.setState({
             currentUser: {
               id: snapShot.id,
-              ...snapShot.data()
-            }
+              ...snapShot.data(),
+            },
           });
         });
       }
-      this.setState({ 
-        currentUser: userAuth 
+      this.setState({
+        currentUser: userAuth,
       });
     });
   }
@@ -56,8 +54,8 @@ class App extends React.Component {
           <div className='header-container'>
             <Header />
           </div>
-        </CurrentUserContext.Provider>  
-        <div className="container">
+        </CurrentUserContext.Provider>
+        <div className='container'>
           <SupplierProvider>
             <Switch>
               <Route exact path='/' component={HomePage} />
@@ -65,7 +63,8 @@ class App extends React.Component {
               <Route
                 exact
                 path='/signin'
-                render={() => this.state.currentUser ? (
+                render={() =>
+                  this.state.currentUser ? (
                     <Redirect to='/' />
                   ) : (
                     <SignInAndSignUpPage />
