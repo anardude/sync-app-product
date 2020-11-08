@@ -11,12 +11,6 @@ import './supplier-list.styles.scss';
 const SupplierList = () => {
   const fields = [
     {
-      name: 'code',
-      title: 'Code',
-      type: 'text',
-      required: true,
-    },
-    {
       name: 'name',
       title: 'Nom',
       type: 'text',

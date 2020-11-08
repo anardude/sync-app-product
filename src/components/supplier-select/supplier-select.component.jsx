@@ -24,7 +24,7 @@ const SupplierSelect = () => {
 
   const selectMap = () => {
     return lines.map(supplier => {
-      return { value: supplier.code, label: supplier.name };
+      return { value: supplier.id, label: supplier.name };
     });
   };
 
