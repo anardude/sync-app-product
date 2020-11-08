@@ -1,13 +1,19 @@
 import React, { useContext, useState, useRef } from 'react';
 
+import { SupplierContext } from '../../providers/supplier/supplier.provider';
+import { MappingContext } from '../../providers/mapping/mapping.provider';
 import CustomInput from '../custom-input/custom-input.component';
 import SpanElement from '../span-element/span-element.component';
 import IconButton from '../icon-button/icon-button.component';
+import CustomSelect from '../custom-select/custom-select.component';
 
-import './list-line-edit.styles.scss';
+import './supplier-line-edit.styles.scss';
 
-const ListLineEdit = ({ fields, line, context }) => {
-  const { editLine, addLine, toggleLineEdit, onLineEdit } = useContext(context);
+const SupplierLineEdit = ({ fields, line }) => {
+  const { editLine, addLine, toggleLineEdit, onLineEdit } = useContext(
+    SupplierContext
+  );
+  const { lines: mappings } = useContext(MappingContext);
 
   const [localLine, setLocalLine] = useState();
 
@@ -48,25 +54,36 @@ const ListLineEdit = ({ fields, line, context }) => {
   const fieldValue = fieldName =>
     (localLine && localLine[fieldName]) || (line && line[fieldName]);
 
+  const selectMap = () => {
+    return mappings.map(line => {
+      return { value: line.id, label: line.name };
+    });
+  };
+
   return (
     <div className='row'>
       {fields.map((field, idx) => {
-        const name = Array.isArray(field.name)
-          ? field.name.toString()
-          : field.name;
-        return (
-          <SpanElement key={idx}>
-            <CustomInput
-              reff={el => (inputRef.current[idx] = el)}
-              type={field.type}
-              name={name}
-              className=''
-              defaultValue={fieldValue(field.name)}
-              onChange={handleChange}
-              required={field.required}
-            />
-          </SpanElement>
-        );
+        let newField;
+        field.name === 'mapping'
+          ? (newField = (
+              <CustomSelect
+                options={selectMap()}
+                defaultValue={(line && line.mapping) || 'DEFAULT'}
+                onChange={handleChange}
+                name={field.name}
+              />
+            ))
+          : (newField = (
+              <CustomInput
+                reff={el => (inputRef.current[idx] = el)}
+                type={field.type}
+                name={field.name}
+                defaultValue={fieldValue(field.name)}
+                onChange={handleChange}
+                required={field.required}
+              />
+            ));
+        return <SpanElement key={idx}>{newField}</SpanElement>;
       })}
       <SpanElement>
         <IconButton
@@ -80,4 +97,4 @@ const ListLineEdit = ({ fields, line, context }) => {
   );
 };
 
-export default ListLineEdit;
+export default SupplierLineEdit;

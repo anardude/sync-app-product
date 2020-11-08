@@ -9,6 +9,7 @@ import {
 
 import './suppliers.styles.scss';
 
+//a voir si suprimer ce composant
 const SupplierPage = () => {
   const { suppliers, updateSuppliers } = useContext(SupplierContext);
 

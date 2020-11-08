@@ -84,6 +84,7 @@ export const ImportProvider = ({ children }) => {
   }, [currentMapping]);
 
   useEffect(() => {
+    setBaseUrl(currentSupplier.baseUrl);
     localStorage.setItem('currentSupplier', JSON.stringify(currentSupplier));
   }, [currentSupplier]);
 

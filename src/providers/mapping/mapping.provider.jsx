@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from 'react';
 export const MappingContext = createContext({
   lines: [],
   onLineEdit: '',
+  getLineById: () => {},
   addLine: () => {},
   editLine: () => {},
   deleteLine: () => {},
@@ -15,6 +16,10 @@ export const MappingProvider = ({ children }) => {
 
   const [lines, setLines] = useState(localData || []);
   const [onLineEdit, setLineEdit] = useState();
+
+  const getLineById = id => {
+    return lines.find(line => line.id.toString() === id.toString());
+  };
 
   const addLine = line => {
     line.id = lines.length + 1;
@@ -49,6 +54,7 @@ export const MappingProvider = ({ children }) => {
       value={{
         lines,
         onLineEdit,
+        getLineById,
         addLine,
         editLine,
         deleteLine,

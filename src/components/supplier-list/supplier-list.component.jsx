@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { SupplierContext } from '../../providers/supplier/supplier.provider';
-import ListList from '../list-list/list-list.component';
+import SupplierLineEdit from '../supplier-line-edit/supplier-line-edit.component';
+import SupplierLine from '../supplier-line/supplier-line.component';
+import SpanElement from '../span-element/span-element.component';
+import IconButton from '../icon-button/icon-button.component';
 
 import './supplier-list.styles.scss';
 
@@ -33,13 +36,45 @@ const SupplierList = () => {
     },
   ];
 
+  const { lines, onLineEdit, toggleLineEdit } = useContext(SupplierContext);
+
+  const handleNewClick = () => {
+    toggleLineEdit('new');
+  };
+
   return (
     <div className='supplier-list'>
-      <ListList
-        fields={fields}
-        mainTitle='Fournisseurs'
-        context={SupplierContext}
-      />
+      <div className='title'>Fournisseurs</div>
+      <div className='content'>
+        <div className='table-title'>
+          {fields.map((field, idx) => (
+            <SpanElement key={idx}>{field.title}</SpanElement>
+          ))}
+          <SpanElement>Actions</SpanElement>
+        </div>
+        {lines &&
+          lines.length > 0 &&
+          lines.map((line, idx) => {
+            return line.id && onLineEdit === line.id ? (
+              <SupplierLineEdit key={idx} fields={fields} line={line} />
+            ) : (
+              <SupplierLine key={idx} fields={fields} line={line} />
+            );
+          })}
+        {onLineEdit === 'new' ? (
+          <SupplierLineEdit fields={fields} />
+        ) : (
+          <div className='new'>
+            <SpanElement>
+              <IconButton
+                icon='&#10010;'
+                title='Nouveau'
+                onClick={handleNewClick}
+              />
+            </SpanElement>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -14,8 +14,10 @@ const MappingSelect = () => {
 
   const [hiddenPop, setHiddenPop] = useState(false);
 
-  const handleChange = value => {
-    handleMappingChange(lines.find(line => line.id == value));
+  const handleChange = e => {
+    handleMappingChange(
+      lines.find(line => line.id.toString() === e.target.value.toString())
+    );
   };
 
   const togglePop = () => {

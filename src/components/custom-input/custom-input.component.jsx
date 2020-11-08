@@ -3,14 +3,14 @@ import React from 'react';
 import './custom-input.styles.scss';
 
 const CustomInput = ({
-  reff,
-  className,
-  type,
-  name,
-  defaultValue,
+  reff = '',
+  className = '',
+  type = '',
+  name = '',
+  defaultValue = '',
   value,
-  required,
-  onChange,
+  required = false,
+  onChange = () => {},
 }) => {
   return (
     <input

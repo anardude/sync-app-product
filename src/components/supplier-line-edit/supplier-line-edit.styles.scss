@@ -1,15 +1,26 @@
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr 3fr 1fr;
-  height: 30px;
 
   :last-child {
     text-align: center;
   }
 
   .element {
+    height: fit-content;
+
+    .custom-select select {
+      margin: auto;
+      padding: 3px;
+    }
+
     input {
       text-align: left;
+    }
+
+    .custon-select select {
+      margin: 0;
+      padding: 0;
     }
 
     .icon-button {

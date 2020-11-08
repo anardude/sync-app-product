@@ -3,10 +3,11 @@ import React from 'react';
 import './custom-select.styles.scss';
 
 const CustomSelect = ({
-  options,
-  onChange,
+  options = [],
+  onChange = () => {},
   defaultValue = 'DEFAULT',
   label = 'Selectionner...',
+  name = '',
 }) => {
   const renderOptions = () =>
     options &&
@@ -21,10 +22,7 @@ const CustomSelect = ({
 
   return (
     <div className='custom-select'>
-      <select
-        onChange={e => onChange(e.target.value)}
-        defaultValue={defaultValue}
-      >
+      <select onChange={onChange} name={name} defaultValue={defaultValue}>
         <option value='DEFAULT' disabled hidden>
           {label}
         </option>

@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
 
+import { SupplierContext } from '../../providers/supplier/supplier.provider';
+import { MappingContext } from '../../providers/mapping/mapping.provider';
 import SpanElement from '../span-element/span-element.component';
 import IconButton from '../icon-button/icon-button.component';
 
-import './list-line.styles.scss';
+import './supplier-line.styles.scss';
 
-const ListLine = ({ fields, line, context }) => {
-  const { deleteLine, toggleLineEdit } = useContext(context);
+const SupplierLine = ({ fields, line }) => {
+  const { deleteLine, toggleLineEdit } = useContext(SupplierContext);
+  const { getLineById } = useContext(MappingContext);
 
   const handleDeleteClick = () => {
     window.confirm(
@@ -22,10 +25,14 @@ const ListLine = ({ fields, line, context }) => {
     <div className='row'>
       {line &&
         fields.map((field, idx) => {
-          const name = Array.isArray(line[field.name])
-            ? line[field.name].toString()
-            : line[field.name];
-          return <SpanElement key={idx}>{name}</SpanElement>;
+          let newField;
+          if (field.name === 'mapping') {
+            const objMapping = getLineById(line[field.name]);
+            newField = (objMapping && objMapping.name) || '';
+          } else {
+            newField = line[field.name];
+          }
+          return <SpanElement key={idx}>{newField}</SpanElement>;
         })}
       <SpanElement>
         <IconButton
@@ -43,4 +50,4 @@ const ListLine = ({ fields, line, context }) => {
   );
 };
 
-export default ListLine;
+export default SupplierLine;

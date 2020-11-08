@@ -1,14 +1,50 @@
 $grid-layout: 1fr 1fr 2fr 1fr 1fr;
 
 .supplier-list {
-  .list-list {
-    .content {
-      .table-title {
-        grid-template-columns: $grid-layout;
-      }
+  width: 100%;
+  height: fit-content;
+  padding-bottom: 20px;
 
-      .row {
-        grid-template-columns: $grid-layout;
+  .title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background-color: #035e0a;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+
+    .table-title {
+      display: grid;
+      font-weight: bold;
+      height: 35px;
+      grid-template-columns: $grid-layout;
+
+      .element {
+        text-align: center;
+      }
+    }
+
+    .row {
+      grid-template-columns: $grid-layout;
+    }
+
+    .new {
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 100%;
+      text-align: left;
+      height: 30px;
+
+      .element {
+        width: fit-content;
+        text-align: left;
+        padding: 5px 0;
+        font-size: 24px;
       }
     }
   }
