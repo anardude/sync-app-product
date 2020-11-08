@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import ListLineEdit from '../list-line-edit/list-line-edit.component';
 import ListLine from '../list-line/list-line.component';
 import SpanElement from '../span-element/span-element.component';
+import IconButton from '../icon-button/icon-button.component';
 
 import './list-list.styles.scss';
 
@@ -46,14 +47,13 @@ const ListList = ({ mainTitle, fields, context }) => {
           <ListLineEdit fields={fields} context={context} />
         ) : (
           <div className='new'>
-            <span
-              onClick={handleNewClick}
-              className='element'
-              alt='Nouveau'
-              title='Nouveau'
-            >
-              &#10010;
-            </span>
+            <SpanElement>
+              <IconButton
+                icon='&#10010;'
+                title='Nouveau'
+                onClick={handleNewClick}
+              />
+            </SpanElement>
           </div>
         )}
       </div>

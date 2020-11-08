@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import SpanElement from '../span-element/span-element.component';
-import CustomSelect from '../custom-select/custom-select.component';
+import IconButton from '../icon-button/icon-button.component';
 
 import './list-line.styles.scss';
 
@@ -18,16 +18,6 @@ const ListLine = ({ fields, line, context }) => {
     toggleLineEdit(line.id);
   };
 
-  // const newFields = fields.map(field => {
-  //   if (field.type === 'select')
-  //     field.type = (
-  //       <CustomSelect
-  //         options={line[field.name].options}
-  //         defaultValue={line[field.name].id}
-  //       />
-  //     );
-  // });
-
   return (
     <div className='row'>
       {line &&
@@ -38,22 +28,16 @@ const ListLine = ({ fields, line, context }) => {
           return <SpanElement key={idx}>{name}</SpanElement>;
         })}
       <SpanElement>
-        <span
+        <IconButton
+          icon='&#9998;'
           onClick={() => handleEditClick()}
-          alt='Editer'
           title='Editer'
-          className='actions'
-        >
-          &#9998;
-        </span>
-        <span
+        />
+        <IconButton
+          icon='&#10006;'
           onClick={() => handleDeleteClick()}
-          alt='Supprimer'
           title='Supprimer'
-          className='actions'
-        >
-          &#10006;
-        </span>
+        />
       </SpanElement>
     </div>
   );

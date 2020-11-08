@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef } from 'react';
 
 import CustomInput from '../custom-input/custom-input.component';
 import SpanElement from '../span-element/span-element.component';
+import IconButton from '../icon-button/icon-button.component';
 
 import './list-line-edit.styles.scss';
 
@@ -68,22 +69,12 @@ const ListLineEdit = ({ fields, line, context }) => {
         );
       })}
       <SpanElement>
-        <span
+        <IconButton
+          icon='&#10004;'
           onClick={handleValidClick}
-          alt='Valider'
           title='Valider'
-          className='actions'
-        >
-          &#10004;
-        </span>
-        <span
-          onClick={toggleLineEdit}
-          alt='Annuler'
-          title='Annuler'
-          className='actions'
-        >
-          &#10007;
-        </span>
+        />
+        <IconButton icon='&#10007;' onClick={toggleLineEdit} title='Annuler' />
       </SpanElement>
     </div>
   );
