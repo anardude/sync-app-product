@@ -44,21 +44,23 @@ const ListLineEdit = ({ fields, line, context }) => {
     });
   };
 
+  const fieldValue = fieldName =>
+    (localLine && localLine[fieldName]) || (line && line[fieldName]);
+
   return (
     <div className='row'>
       {fields.map((field, idx) => {
+        const name = Array.isArray(field.name)
+          ? field.name.toString()
+          : field.name;
         return (
           <SpanElement key={idx}>
             <CustomInput
               reff={el => (inputRef.current[idx] = el)}
-              type='text'
-              name={field.name}
+              type={field.type}
+              name={name}
               className=''
-              value={
-                (localLine && localLine[field.name]) ||
-                (line && line[field.name]) ||
-                ''
-              }
+              defaultValue={fieldValue(field.name)}
               onChange={handleChange}
               required={field.required}
             />

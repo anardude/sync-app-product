@@ -7,6 +7,7 @@ const CustomInput = ({
   className,
   type,
   name,
+  defaultValue,
   value,
   required,
   onChange,
@@ -19,6 +20,7 @@ const CustomInput = ({
       type={type}
       name={name}
       value={value}
+      defaultValue={defaultValue}
       onChange={onChange}
     />
   );

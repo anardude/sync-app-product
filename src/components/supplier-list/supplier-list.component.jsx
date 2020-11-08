@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SupplierContext } from '../../providers/suppliers/supplier.provider';
+import { SupplierContext } from '../../providers/supplier/supplier.provider';
 import ListList from '../list-list/list-list.component';
 
 import './supplier-list.styles.scss';
@@ -15,7 +15,7 @@ const SupplierList = () => {
     },
     {
       name: 'name',
-      title: 'Name',
+      title: 'Nom',
       type: 'text',
       required: true,
     },
@@ -23,6 +23,12 @@ const SupplierList = () => {
       name: 'baseUrl',
       title: 'Base Url',
       type: 'text',
+      required: false,
+    },
+    {
+      name: 'mapping',
+      title: 'Mapping par defaut',
+      type: 'select',
       required: false,
     },
   ];

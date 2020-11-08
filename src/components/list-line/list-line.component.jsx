@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import SpanElement from '../span-element/span-element.component';
+import CustomSelect from '../custom-select/custom-select.component';
 
 import './list-line.styles.scss';
 
@@ -17,12 +18,25 @@ const ListLine = ({ fields, line, context }) => {
     toggleLineEdit(line.id);
   };
 
+  // const newFields = fields.map(field => {
+  //   if (field.type === 'select')
+  //     field.type = (
+  //       <CustomSelect
+  //         options={line[field.name].options}
+  //         defaultValue={line[field.name].id}
+  //       />
+  //     );
+  // });
+
   return (
     <div className='row'>
       {line &&
-        fields.map((field, idx) => (
-          <SpanElement key={idx}>{line[field.name]}</SpanElement>
-        ))}
+        fields.map((field, idx) => {
+          const name = Array.isArray(line[field.name])
+            ? line[field.name].toString()
+            : line[field.name];
+          return <SpanElement key={idx}>{name}</SpanElement>;
+        })}
       <SpanElement>
         <span
           onClick={() => handleEditClick()}

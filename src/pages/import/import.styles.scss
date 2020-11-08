@@ -1,38 +1,37 @@
 .import-page {
-    width: 90vw;
-    margin: auto;
-    display: block;
-    padding-top: 10px;
-    border: 1px solid grey;
-    box-shadow: 0px 4px 18px rgba(0,0,0,0.3);
-    background-color: rgba($color: #FFFFFF, $alpha: 0.8);
+  width: 90vw;
+  margin: auto;
+  display: block;
+  padding-top: 10px;
+  border: 1px solid grey;
+  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.3);
+  background-color: rgba($color: #ffffff, $alpha: 0.8);
 
-    
-    .import-area-container {
-        display: flex;
-        min-width: 400px;
-        
-        .button-container {
-            min-height: 20px;
-            padding: 0 5px;
-            width: 15%;
-            min-width: fit-content;
+  .import-area-container {
+    display: flex;
+    min-width: 400px;
 
-            .spacer {
-                height: 130px;
-            }
+    .button-container {
+      min-height: 20px;
+      padding: 0 5px;
+      width: 15%;
+      min-width: fit-content;
 
-            button.custom-button {
-                color: white;
-                background-color: blue;
-                height: 30px;
-                line-height: 30px;
-                margin: auto;
-                margin-bottom: 10px;
-            }
-        }
-        .import-area {
-            width: 85%;
-        }
+      .spacer {
+        height: 90px;
+      }
+
+      button.custom-button {
+        color: white;
+        background-color: blue;
+        height: 30px;
+        line-height: 30px;
+        margin: auto;
+        margin-bottom: 10px;
+      }
     }
+    .import-area {
+      width: 85%;
+    }
+  }
 }

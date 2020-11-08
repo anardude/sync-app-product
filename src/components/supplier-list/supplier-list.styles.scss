@@ -1,12 +1,14 @@
+$grid-layout: 1fr 1fr 2fr 1fr 1fr;
+
 .supplier-list {
   .list-list {
     .content {
       .table-title {
-        grid-template-columns: 1fr 1fr 2fr 1fr;
+        grid-template-columns: $grid-layout;
       }
 
       .row {
-        grid-template-columns: 1fr 1fr 2fr 1fr;
+        grid-template-columns: $grid-layout;
       }
     }
   }

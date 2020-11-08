@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 import {
   cleanTextFromBlankLines,
@@ -12,8 +12,12 @@ export const ImportContext = createContext({
   dataTable: [],
   indexLastField: 0,
   baseUrl: '',
+  currentMapping: {},
+  currentSupplier: '',
   handleChangeArea: () => {},
   handleCheckboxChange: () => {},
+  handleSupplierChange: () => {},
+  handleMappingChange: () => {},
   handleFieldChange: () => {},
   handleClickValidButton: () => {},
   handleClickAnalyseButton: () => {},
@@ -22,10 +26,15 @@ export const ImportContext = createContext({
 });
 
 export const ImportProvider = ({ children }) => {
-  const fields = ['code', 'name', 'country', 'price', 'weight', 'quantity'];
-  const baseUrl = 'https://extranet.organic-alliance.com/product/';
+  const localCurrentMapping =
+    JSON.parse(localStorage.getItem('currentMapping')) || [];
+  const localCurrentSupplier =
+    JSON.parse(localStorage.getItem('currentSupplier')) || '';
 
-  const [tabFields, setTabFields] = useState(fields);
+  const [currentMapping, setCurrentMapping] = useState(localCurrentMapping);
+  const [currentSupplier, setCurrentSupplier] = useState(localCurrentSupplier);
+  const [baseUrl, setBaseUrl] = useState(localCurrentSupplier.baseUrl);
+  const [tabFields, setTabFields] = useState(currentMapping.fields);
   const [dataArea, setDataArea] = useState('');
   const [dataTable, setDataTable] = useState('');
   const [indexLastField, setIndexLastField] = useState(0);
@@ -35,12 +44,25 @@ export const ImportProvider = ({ children }) => {
   const handleCheckboxChange = (c, idx) => c && setIndexLastField(idx);
 
   const handleFieldChange = (f, idx) => {
-    fields[idx] = f;
-    setTabFields(fields);
+    tabFields[idx] = f;
+    setTabFields(tabFields);
   };
 
-  const handleClickAnalyseButton = () =>
+  const handleSupplierChange = supplier => {
+    setCurrentSupplier(supplier);
+    return supplier;
+  };
+
+  const handleMappingChange = mapping => {
+    setCurrentMapping(mapping);
+    setTabFields(mapping.fields);
+    return mapping;
+  };
+
+  const handleClickAnalyseButton = () => {
+    setDataTable([]);
     setDataTable(convertTextToArray(dataArea));
+  };
 
   const handleClickClearButton = () => {
     setDataArea('');
@@ -57,6 +79,14 @@ export const ImportProvider = ({ children }) => {
     console.log(data);
   };
 
+  useEffect(() => {
+    localStorage.setItem('currentMapping', JSON.stringify(currentMapping));
+  }, [currentMapping]);
+
+  useEffect(() => {
+    localStorage.setItem('currentSupplier', JSON.stringify(currentSupplier));
+  }, [currentSupplier]);
+
   return (
     <ImportContext.Provider
       value={{
@@ -64,8 +94,12 @@ export const ImportProvider = ({ children }) => {
         dataArea,
         dataTable,
         indexLastField,
+        currentMapping,
+        currentSupplier,
         handleChangeArea,
         handleCheckboxChange,
+        handleSupplierChange,
+        handleMappingChange,
         handleFieldChange,
         handleClickValidButton,
         handleClickAnalyseButton,

@@ -9,8 +9,8 @@ import Header from './components/header/header.component';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
+import ProviderPack from './providers/index.provider';
 import CurrentUserContext from './contexts/current-user/current-user.context';
-import SupplierProvider from './providers/suppliers/supplier.provider';
 
 import './App.css';
 
@@ -56,7 +56,7 @@ class App extends React.Component {
           </div>
         </CurrentUserContext.Provider>
         <div className='container'>
-          <SupplierProvider>
+          <ProviderPack>
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route exact path='/import' component={ImportPage} />
@@ -72,7 +72,7 @@ class App extends React.Component {
                 }
               />
             </Switch>
-          </SupplierProvider>
+          </ProviderPack>
         </div>
       </div>
     );

@@ -11,24 +11,26 @@ export const SupplierContext = createContext({
 
 export const SupplierProvider = ({ children }) => {
   //localStorage.clear();
-  const localSuppliers = JSON.parse(localStorage.getItem('suppliers'));
+  const localData = JSON.parse(localStorage.getItem('suppliers'));
 
-  const [lines, setSuppliers] = useState(localSuppliers || []);
+  const [lines, setLines] = useState(localData || []);
   const [onLineEdit, setLineEdit] = useState();
 
-  const addLine = supplier => {
-    supplier.id = lines.length + 1;
-    setSuppliers([...lines, supplier]);
+  const addLine = line => {
+    line.id = lines.length + 1;
+    // line.mapping = line.mapping && {
+    //   id: line.mapping,
+    //   options:
+    // }
+    setLines([...lines, line]);
   };
 
-  const editLine = supplier => {
-    setSuppliers(
-      lines.map(item => (item.id === supplier.id ? supplier : item))
-    );
+  const editLine = line => {
+    setLines(lines.map(item => (item.id === line.id ? line : item)));
   };
 
-  const deleteLine = supplier => {
-    setSuppliers(lines.filter(item => item.id !== supplier.id));
+  const deleteLine = line => {
+    setLines(lines.filter(item => item.id !== line.id));
   };
 
   const toggleLineEdit = (id = '') => setLineEdit(onLineEdit ? '' : id);

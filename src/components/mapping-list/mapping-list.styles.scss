@@ -1,0 +1,15 @@
+$grid-layout: 1fr 1fr 2fr 1fr;
+
+.mapping-list {
+  .list-list {
+    .content {
+      .table-title {
+        grid-template-columns: $grid-layout;
+      }
+
+      .row {
+        grid-template-columns: $grid-layout;
+      }
+    }
+  }
+}
