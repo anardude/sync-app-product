@@ -13,7 +13,7 @@ export const ImportContext = createContext({
   indexLastField: 0,
   baseUrl: '',
   currentMapping: {},
-  currentSupplier: '',
+  currentSupplier: {},
   handleChangeArea: () => {},
   handleCheckboxChange: () => {},
   handleSupplierChange: () => {},
@@ -27,9 +27,9 @@ export const ImportContext = createContext({
 
 export const ImportProvider = ({ children }) => {
   const localCurrentMapping =
-    JSON.parse(localStorage.getItem('currentMapping')) || [];
+    JSON.parse(localStorage.getItem('currentMapping')) || {};
   const localCurrentSupplier =
-    JSON.parse(localStorage.getItem('currentSupplier')) || '';
+    JSON.parse(localStorage.getItem('currentSupplier')) || {};
 
   const [currentMapping, setCurrentMapping] = useState(localCurrentMapping);
   const [currentSupplier, setCurrentSupplier] = useState(localCurrentSupplier);
@@ -76,7 +76,7 @@ export const ImportProvider = ({ children }) => {
       indexLastField,
       baseUrl,
     });
-    console.log(data);
+    return data;
   };
 
   useEffect(() => {

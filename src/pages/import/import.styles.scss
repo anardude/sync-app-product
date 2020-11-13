@@ -21,7 +21,9 @@
         height: 90px;
       }
 
-      button.custom-button {
+      button.custom-button,
+      a.custom-button {
+        display: flex;
         color: white;
         background-color: blue;
         height: 30px;

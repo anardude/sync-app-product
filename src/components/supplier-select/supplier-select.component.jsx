@@ -10,12 +10,14 @@ import './supplier-select.styles.scss';
 
 const SupplierSelect = () => {
   const { lines } = useContext(SupplierContext);
-  const { handleSupplierChange } = useContext(ImportContext);
+  const { handleSupplierChange, currentSupplier } = useContext(ImportContext);
 
   const [hiddenPop, setHiddenPop] = useState(false);
 
   const handleChange = e => {
-    handleSupplierChange(e.target.value);
+    handleSupplierChange(
+      lines.find(line => line.id.toString() === e.target.value.toString())
+    );
   };
 
   const togglePop = () => {
@@ -32,6 +34,7 @@ const SupplierSelect = () => {
     <div className='supplier-select'>
       <CustomSelect
         options={selectMap()}
+        defaultValue={currentSupplier.id}
         onChange={handleChange}
         label='Fournisseurs'
       />

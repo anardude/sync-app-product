@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { CSVLink } from 'react-csv';
 
 import ImportArea from '../../components/import-area/import-area.component';
 import ImportTable from '../../components/import-table/import-table.component';
@@ -17,6 +19,22 @@ const ImportPage = () => {
     handleClickClearButton,
   } = React.useContext(ImportContext);
 
+  const data = [
+    ['firstname', 'lastname', 'email'],
+    ['Ahmed', 'Tomi', 'ah@smthing.co.com'],
+    ['Raed', 'Labes', 'rl@smthing.co.com'],
+    ['Yezzi', 'Min l3b', 'ymin@cocococo.com'],
+  ];
+
+  const [csvData, setcsvData] = useState(data);
+
+  const clickValidButton = () => {
+    setcsvData(handleClickValidButton() || []);
+    //document.querySelector('div[class="csv-button"]').click();
+  };
+
+  useEffect(() => {});
+
   return (
     <div className='import-page'>
       <div className='import-area-container'>
@@ -29,7 +47,18 @@ const ImportPage = () => {
             Analyse
           </CustomButton>
           <CustomButton onClick={handleClickClearButton}>Effacer</CustomButton>
-          <CustomButton onClick={handleClickValidButton}>Valider</CustomButton>
+          <CustomButton style={{ display: 'none' }} onClick={clickValidButton}>
+            Valider
+          </CustomButton>
+          <CSVLink
+            className='custom-button'
+            onClick={clickValidButton}
+            filename='Export.csv'
+            separator=';'
+            data={csvData}
+          >
+            Valider
+          </CSVLink>
         </div>
       </div>
       <ImportTable />
