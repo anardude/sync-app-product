@@ -22,7 +22,6 @@ export const ImportContext = createContext({
   handleClickValidButton: () => {},
   handleClickAnalyseButton: () => {},
   handleClickClearButton: () => {},
-  setIndexLastField: () => {},
 });
 
 export const ImportProvider = ({ children }) => {
@@ -38,13 +37,30 @@ export const ImportProvider = ({ children }) => {
   const [dataArea, setDataArea] = useState('');
   const [dataTable, setDataTable] = useState('');
   const [indexLastField, setIndexLastField] = useState(0);
+  //const [indexFirstField, setIndexFirstField] = useState(0);
 
-  const handleChangeArea = text => setDataArea(cleanTextFromBlankLines(text));
+  const handleChangeArea = text => setDataArea(text); // setDataArea(cleanTextFromBlankLines(text));
 
-  const handleCheckboxChange = (c, idx) => c && setIndexLastField(idx);
+  const handleCheckboxChange = (c, idx) => {
+    //console.log(idx);
+    // if(c) {
+    //   if(indexFirstField === 0){
+    //     if(indexLastField === 0){
+    //       if(idx > 0) setIndexLastField(idx);
+    //     }
+    //     if(indexLastField > 0){
+    //       if(idx > 0) setIndexLastField(idx);
+    //     }
+
+    //   }
+
+    // }
+    return c && setIndexLastField(idx);
+  };
 
   const handleFieldChange = (f, idx) => {
     tabFields[idx] = f;
+    //console.log(idx, f);
     setTabFields(tabFields);
   };
 
@@ -76,6 +92,7 @@ export const ImportProvider = ({ children }) => {
       indexLastField,
       baseUrl,
     });
+    console.log(data);
     return data;
   };
 
@@ -105,7 +122,6 @@ export const ImportProvider = ({ children }) => {
         handleClickValidButton,
         handleClickAnalyseButton,
         handleClickClearButton,
-        setIndexLastField,
       }}
     >
       {children}
