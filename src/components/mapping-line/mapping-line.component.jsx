@@ -24,7 +24,9 @@ const MappingLine = ({ fields, line }) => {
       {line &&
         fields.map((field, idx) => {
           const name = Array.isArray(line[field.name])
-            ? line[field.name].toString()
+            ? line[field.name]
+              ? line[field.name].toString()
+              : ''
             : line[field.name];
           return <SpanElement key={idx}>{name}</SpanElement>;
         })}

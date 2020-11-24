@@ -55,7 +55,9 @@ const MappingLineEdit = ({ fields, line }) => {
     <div className='row'>
       {fields.map((field, idx) => {
         const name = Array.isArray(field.name)
-          ? field.name.toString()
+          ? field.name
+            ? field.name.toString()
+            : ''
           : field.name;
         return (
           <SpanElement key={idx}>
